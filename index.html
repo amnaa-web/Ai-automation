@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowPilot AI - Automation MVP</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span><strong>FlowPilot AI</strong></div>
+  <div id="health" class="pill">Checking backend...</div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div>
+      <span class="eyebrow">AI AUTOMATION MVP</span>
+      <h1>Design, test, and approve production-minded AI workflows.</h1>
+      <p>A compact demo for AI agents, LLM routing, API integrations, human approval, retries, logging, and workflow orchestration.</p>
+    </div>
+    <div class="hero-grid">
+      <div class="metric"><span>Provider</span><strong id="providerMetric">OpenAI</strong></div>
+      <div class="metric"><span>Approval</span><strong>Human-in-loop</strong></div>
+      <div class="metric"><span>Runs</span><strong id="runCount">0</strong></div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <div class="card-head">
+        <div><span class="eyebrow">WORKFLOW INPUT</span><h2>Run an AI automation</h2></div>
+        <span class="status">Ready</span>
+      </div>
+
+      <form id="workflowForm" class="form">
+        <label>
+          Business request
+          <textarea id="requestInput" required placeholder="Example: Summarize this sales lead, classify urgency, and create a CRM follow-up task."></textarea>
+        </label>
+
+        <div class="row">
+          <label>
+            LLM Provider
+            <select id="provider">
+              <option value="openai">OpenAI</option>
+              <option value="claude">Claude</option>
+              <option value="gemini">Gemini</option>
+            </select>
+          </label>
+
+          <label>
+            Workflow Type
+            <select id="workflowType">
+              <option value="crm">CRM Automation</option>
+              <option value="support">Support Triage</option>
+              <option value="rag">RAG Knowledge Task</option>
+              <option value="ops">Operations Workflow</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="check">
+          <input id="approvalRequired" type="checkbox" checked>
+          Require human approval before external action
+        </label>
+
+        <button type="submit">Run Workflow</button>
+      </form>
+    </article>
+
+    <article class="card">
+      <div class="card-head"><div><span class="eyebrow">ORCHESTRATION</span><h2>Workflow Steps</h2></div></div>
+      <div class="steps">
+        <div class="step"><span>1</span><div><b>Input</b><small>Validate business request</small></div></div>
+        <div class="step"><span>2</span><div><b>LLM Reasoning</b><small>Classify and structure output</small></div></div>
+        <div class="step"><span>3</span><div><b>Tool Call</b><small>Prepare API / CRM action</small></div></div>
+        <div class="step"><span>4</span><div><b>Approval</b><small>Human review for sensitive action</small></div></div>
+        <div class="step"><span>5</span><div><b>Execution</b><small>Log result and retry if needed</small></div></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="grid lower">
+    <article class="card">
+      <div class="card-head"><div><span class="eyebrow">LATEST RESULT</span><h2>Structured Agent Output</h2></div></div>
+      <pre id="resultBox" class="result">Run a workflow to see structured output.</pre>
+      <div id="approvalBox" class="approval hidden">
+        <div>
+          <b>Approval required</b>
+          <p>The workflow prepared an external action but did not execute it yet.</p>
+        </div>
+        <button id="approveBtn" type="button">Approve Action</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-head"><div><span class="eyebrow">OBSERVABILITY</span><h2>Execution Log</h2></div></div>
+      <div id="logList" class="logs"><div class="empty">No workflow runs yet.</div></div>
+    </article>
+  </section>
+
+  <section class="architecture">
+    <span>Suggested production architecture</span>
+    <strong>Business Request → FastAPI → LangGraph-style Orchestration → LLM → Structured Tool Call → Human Approval → CRM / SaaS / DB → Logs & Monitoring</strong>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
